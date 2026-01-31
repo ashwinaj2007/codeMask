@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 # Constants
-const SPEED = 150.0
-const JUMP_VELOCITY = -350.0
-const GRAVITY = 800.0
+const SPEED = 150.0 * 2
+const JUMP_VELOCITY = -350.0 * 2
+const GRAVITY = 800.0 * 2
 
 # Mask State
 var mask_state = "RED" # Default to Command Mask

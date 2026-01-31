@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://52kfg8p81vew" path="res://Player/Sprites/player.png" id="1_sor1j"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2lmi"]
-radius = 18.0
-height = 60.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sor1j"]
+size = Vector2(38, 53)
 
 [node name="Player" type="CharacterBody2D" unique_id=1712248425]
 
@@ -12,5 +11,7 @@ height = 60.0
 texture = ExtResource("1_sor1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2031089873]
-position = Vector2(3, 4)
-shape = SubResource("CapsuleShape2D_y2lmi")
+position = Vector2(3, 7.5)
+shape = SubResource("RectangleShape2D_sor1j")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=955621648]
