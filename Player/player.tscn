@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://b5lq1sw3l3h8s"]
+
+[ext_resource type="Texture2D" uid="uid://cyjs4a56uf6fa" path="res://Player/Sprites/player_command_sheet.png" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://cauonphwee34a" path="res://Player/Sprites/guard_sprite.png" id="2_btcbx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2lmi"]
+radius = 18.0
+height = 60.0
+
+[sub_resource type="Animation" id="Animation_gwnis"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_k53q1"]
+resource_name = "ghost_walk"
+
+[sub_resource type="Animation" id="Animation_fhl08"]
+resource_name = "left_walk"
+length = 1.4675
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.5, 0.83, 1.17),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_vtle1"]
+resource_name = "walk"
+length = 1.1666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.59, 0.82),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 3, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_od3ui"]
+_data = {
+&"RESET": SubResource("Animation_gwnis"),
+&"ghost_walk": SubResource("Animation_k53q1"),
+&"left_walk": SubResource("Animation_fhl08"),
+&"walk": SubResource("Animation_vtle1")
+}
+
+[sub_resource type="Animation" id="Animation_4ntmi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_00tjw"]
+resource_name = "guard_walk"
+length = 1.6666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3vf3"]
+_data = {
+&"RESET": SubResource("Animation_4ntmi"),
+&"guard_walk": SubResource("Animation_00tjw")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1712248425]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2031089873]
+shape = SubResource("CapsuleShape2D_y2lmi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1135705203]
+
+[node name="PlayerCommandSheet" type="Sprite2D" parent="." unique_id=1072449266]
+position = Vector2(-288.00012, -104)
+scale = Vector2(0.51952004, 0.48442066)
+texture = ExtResource("1_4ntmi")
+flip_h = true
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCommandSheet" unique_id=948101142]
+libraries/ = SubResource("AnimationLibrary_od3ui")
+
+[node name="GuardSprite" type="Sprite2D" parent="." unique_id=340032355]
+position = Vector2(-32.000004, -64)
+scale = Vector2(0.39800385, 0.33337387)
+texture = ExtResource("2_btcbx")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GuardSprite" unique_id=857139251]
+libraries/ = SubResource("AnimationLibrary_x3vf3")
