@@ -37,7 +37,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("switch_mask"):
 		toggle_mask()
 
-
 func toggle_mask():
 	if mask_state == "RED":
 		mask_state = "BLUE"
