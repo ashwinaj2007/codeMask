@@ -1,17 +1,106 @@
-[gd_scene format=3 uid="uid://dpbuyj2ed1v1q"]
+[gd_scene format=3 uid="uid://u5gervi50wny"]
 
-[ext_resource type="Texture2D" uid="uid://52kfg8p81vew" path="res://Player/Sprites/player.png" id="1_sor1j"]
+[ext_resource type="Texture2D" uid="uid://camtu3nmgnx8y" path="res://Sprites/newPlayerWalk/1.png" id="1_im3si"]
+[ext_resource type="Script" uid="uid://cwp3nr2i13pnw" path="res://Actors/Player.gd" id="1_xrrhc"]
+[ext_resource type="Texture2D" uid="uid://dhjt33ylqwy71" path="res://Sprites/newPlayerWalk/2.png" id="2_xrrhc"]
+[ext_resource type="Texture2D" uid="uid://c42gvps4y06ro" path="res://Sprites/newPlayerJump/pixil-frame-0 (1).png" id="3_5g0d2"]
+[ext_resource type="Texture2D" uid="uid://dwbqm0xub3bs6" path="res://Sprites/newPlayerWalk/3.png" id="3_x082k"]
+[ext_resource type="Texture2D" uid="uid://b682kfs4j6730" path="res://Sprites/newPlayerWalk/4.png" id="4_1202u"]
+[ext_resource type="Texture2D" uid="uid://dbyabwb8lnqrx" path="res://Sprites/newPlayerJump/pixil-frame-0 (2).png" id="4_peon3"]
+[ext_resource type="Texture2D" uid="uid://emw2x18mm6ej" path="res://Sprites/newPlayerWalk/5.png" id="5_cq8v7"]
+[ext_resource type="Texture2D" uid="uid://csmakvmax3fo5" path="res://Sprites/newPlayerJump/pixil-frame-0 (3).png" id="5_t8soe"]
+[ext_resource type="Texture2D" uid="uid://bepeldowq57ns" path="res://Sprites/newPlayerWalk/6.png" id="6_sc6uu"]
+[ext_resource type="Texture2D" uid="uid://c6orxih6sjmq5" path="res://Sprites/newPlayerJump/pixil-frame-0 (7).png" id="9_adqer"]
+[ext_resource type="Texture2D" uid="uid://ckcjuj85ydbdm" path="res://Sprites/newPlayerJump/pixil-frame-0 (8).png" id="10_w2l8t"]
+[ext_resource type="Texture2D" uid="uid://bj8cmma3vbfb2" path="res://Sprites/newPlayerJump/pixil-frame-0.png" id="11_i5i1u"]
+[ext_resource type="AudioStream" uid="uid://dn30gvl78hn8b" path="res://Audio/jump.wav" id="14_x581m"]
+[ext_resource type="AudioStream" uid="uid://tl75vy7xs0yu" path="res://Audio/walk.mp3" id="15_mdhmf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sor1j"]
-size = Vector2(38, 53)
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ye75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_im3si")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5g0d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_peon3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t8soe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_adqer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w2l8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_i5i1u")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_im3si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xrrhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x082k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1202u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cq8v7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sc6uu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
-[node name="Player" type="CharacterBody2D" unique_id=1712248425]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tupq"]
+size = Vector2(32, 53)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197309595]
-texture = ExtResource("1_sor1j")
+[node name="Player" type="CharacterBody2D" unique_id=621266039 groups=["Player"]]
+collision_mask = 22
+script = ExtResource("1_xrrhc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2031089873]
-position = Vector2(3, 7.5)
-shape = SubResource("RectangleShape2D_sor1j")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=613980143]
+sprite_frames = SubResource("SpriteFrames_7ye75")
+animation = &"idle"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=955621648]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1657820224]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_5tupq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1071240258]
+limit_left = 0
+limit_top = 0
+limit_right = 3838
+limit_bottom = 667
+position_smoothing_enabled = true
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1388260428]
+stream = ExtResource("14_x581m")
+volume_db = 10.561
+autoplay = true
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="." unique_id=1317437170]
+stream = ExtResource("15_mdhmf")
+volume_db = 14.312
+autoplay = true

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bk1qwmvy0jeov"]
+
+[ext_resource type="Script" uid="uid://ba6e1cclthruu" path="res://Actors/BluePlatform.gd" id="1_jd3xj"]
+[ext_resource type="Texture2D" uid="uid://cg0tgu3djf5su" path="res://Sprites/BluePlatform.jpeg" id="2_jn2l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vpy4"]
+size = Vector2(93, 28)
+
+[node name="BluePlatform" type="StaticBody2D" unique_id=908946552]
+collision_layer = 16
+script = ExtResource("1_jd3xj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=434231673]
+texture = ExtResource("2_jn2l2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=445808041]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_0vpy4")

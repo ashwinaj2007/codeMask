@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dbrnfop4aujt1"]
+
+[ext_resource type="Script" uid="uid://bb11yu14hr4qm" path="res://Scenes/GameOver.gd" id="1_m5628"]
+[ext_resource type="Texture2D" uid="uid://yshnglk6ku58" path="res://Sprites/GameOver.png" id="2_k52d1"]
+
+[node name="GameOver" type="Control" unique_id=1267619131]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_m5628")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=572939429]
+layout_mode = 0
+offset_right = 965.0
+offset_bottom = 439.0
+color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="TextureRect" parent="." unique_id=1560075019]
+layout_mode = 1
+offset_right = 1024.0
+offset_bottom = 1658.0
+texture = ExtResource("2_k52d1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=224134504]
+layout_mode = 0
+offset_left = 391.00003
+offset_top = 179.00002
+offset_right = 483.00003
+offset_bottom = 237.00002
+scale = Vector2(2.3746853, 2.667858)
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=628296528]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+text = "RESTART"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

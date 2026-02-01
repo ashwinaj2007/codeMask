@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dpbuyj2ed1v1q"]
+
+[ext_resource type="Script" uid="uid://jmu3e2ti2j1w" path="res://Actors/old_player.gd" id="1_y2lmi"]
+[ext_resource type="Texture2D" uid="uid://dxc4cpu3apomx" path="res://Sprites/command_mask_spritesheet (1).png" id="2_y2lmi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sor1j"]
+size = Vector2(38, 53)
+
+[sub_resource type="Animation" id="Animation_xk7p5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_y2lmi"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_xmrs8"]
+resource_name = "walk"
+length = 1.2666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.8000001, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [15, 21, 17, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l3d2q"]
+_data = {
+&"RESET": SubResource("Animation_xk7p5"),
+&"idle": SubResource("Animation_y2lmi"),
+&"walk": SubResource("Animation_xmrs8")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1712248425]
+script = ExtResource("1_y2lmi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197309595]
+texture = ExtResource("2_y2lmi")
+hframes = 12
+vframes = 7
+frame = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2031089873]
+position = Vector2(3, 7.5)
+shape = SubResource("RectangleShape2D_sor1j")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=955621648]
+enabled = false
+position_smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=724697685]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_l3d2q")

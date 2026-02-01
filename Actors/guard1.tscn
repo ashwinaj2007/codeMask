@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://blbcbh2b4fwqf"]
+
+[ext_resource type="Script" uid="uid://dduult0fqmfv5" path="res://Actors/guard.gd" id="1_qmjia"]
+[ext_resource type="Texture2D" uid="uid://c7t6qq70gg1hu" path="res://Player/Sprites/sprite-256px-36.png" id="3_btcbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43o0m"]
+size = Vector2(61, 219)
+
+[sub_resource type="Animation" id="Animation_od3ui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_x3vf3"]
+resource_name = "guard_walk"
+length = 2.959
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.10000001, 0.06666667, 0.23333333, 0.36666667, 0.53333336, 0.7, 0.8666667, 1, 1.1666666, 1.3, 1.5, 1.6666666, 1.8333334, 2, 2.1666667, 2.3333333, 2.5666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 32, 35, 38, 41, 44, 47]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apopc"]
+_data = {
+&"RESET": SubResource("Animation_od3ui"),
+&"guard_walk": SubResource("Animation_x3vf3")
+}
+
+[node name="Guard" type="CharacterBody2D" unique_id=1712248425 groups=["guards"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_qmjia")
+detection_time = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=463791953]
+texture = ExtResource("3_btcbx")
+hframes = 18
+vframes = 6
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2031089873]
+position = Vector2(-9.5, -0.5)
+shape = SubResource("RectangleShape2D_43o0m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=728036328]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_apopc")
+
+[node name="VisionArea" type="Area2D" parent="." unique_id=1519291672]
+collision_layer = 8
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea" unique_id=2113295014]
+position = Vector2(-2, -86)
+polygon = PackedVector2Array(73, 21, 440, 171, 426, -2)
+
+[node name="VisionVisual" type="Polygon2D" parent="." unique_id=1422895925]
+color = Color(0.4132331, 0.60990685, 0.44863433, 1)
+polygon = PackedVector2Array(74, -65, 424, -97, 433, 79)
+
+[node name="AlertUI" type="CanvasLayer" parent="." unique_id=1566214367]
+
+[node name="AlertBar" type="TextureProgressBar" parent="AlertUI" unique_id=1048452778]
+visible = false
+offset_left = -77.0
+offset_top = -219.0
+offset_right = 74.0
+offset_bottom = -179.0
+max_value = 1.0
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]
